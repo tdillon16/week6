@@ -23,26 +23,24 @@ var Card = require('./components/Card')
 // END OF STUFF TO NOT MODIFY
 
 var App = React.createClass({
+  getInitialState: function(){
+    return({
+      deck: getDeck().shuffle()
+    });
+  },
   render: function() {
+    var topFive = this.state.deck.slice(0,5)
     return (
       <div>
         <h1>Welcome to the KIEI-924 Casino!</h1>
         <div className="row">
-          <div className="col-sm-2">
-            <h1><img className="img-responsive" src={"http://golearntocode.com/images/cards/" + "face_down" + ".png"} /></h1>
-          </div>
-          <div className="col-sm-2">
-            <h1><img className="img-responsive" src={"http://golearntocode.com/images/cards/" + "face_down" + ".png"} /></h1>
-          </div>
-          <div className="col-sm-2">
-            <h1><img className="img-responsive" src={"http://golearntocode.com/images/cards/" + "face_down" + ".png"} /></h1>
-          </div>
-          <div className="col-sm-2">
-            <h1><img className="img-responsive" src={"http://golearntocode.com/images/cards/" + "face_down" + ".png"} /></h1>
-          </div>
-          <div className="col-sm-2">
-            <h1><img className="img-responsive" src={"http://golearntocode.com/images/cards/" + "face_down" + ".png"} /></h1>
-          </div>
+          {topFive.map(function(cardname){
+            return(
+              <div className="col-sm-2">
+                <Card cardname={cardname}/>
+              </div>
+            );
+          })}
           <div className="col-sm-2">
             <h1><a href="#" className="btn btn-success">Deal</a></h1>
           </div>
