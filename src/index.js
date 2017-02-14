@@ -23,28 +23,30 @@ var Card = require('./components/Card')
 // END OF STUFF TO NOT MODIFY
 
 var App = React.createClass({
+  newCards: function () {
+    this.setState({
+      hand: getDeck().shuffle().splice(0,5)
+    })
+  },
   getInitialState: function(){
     return({
-      deck: getDeck().shuffle()
+      hand: ["face_down", "face_down", "face_down", "face_down", "face_down"]
     });
   },
   render: function() {
-    var topFive = this.state.deck.slice(0,5)
     return (
       <div>
         <h1>Welcome to the KIEI-924 Casino!</h1>
         <div className="row">
-          {topFive.map(function(cardname){
-            return(
-              <div className="col-sm-2">
-                <Card cardname={cardname}/>
-              </div>
-            );
-          })}
           <div className="col-sm-2">
-            <h1><a href="#" className="btn btn-success">Deal</a></h1>
+            <h1><a href="#" onClick={this.newCards} className="btn btn-success">Deal</a></h1>
           </div>
-        </div>
+          <Card card={this.state.hand[0]} />
+          <Card card={this.state.hand[1]} />
+          <Card card={this.state.hand[2]} />
+          <Card card={this.state.hand[3]} />
+          <Card card={this.state.hand[4]} />
+         </div>
       </div>
     )
   }
